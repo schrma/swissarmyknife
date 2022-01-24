@@ -34,7 +34,7 @@ swissarmyknife
 ==============
 
 
-    Add a short description here!
+    Here comes more
 
 
 A longer description of your project goes here...
