@@ -19,7 +19,7 @@ def test_get_all_files_from_folder___input_folder___equal_files(tmpdir, file_lis
 
 @pytest.mark.parametrize(
     "post_folder",
-    [["Bash", "Git", "joplin", "Matlab", "MyScripts", "Powershell", "Shell"],
+    [["Git", "Bash", "joplin", "Matlab", "MyScripts", "Powershell", "Shell"],
      ['test1', 'test2']]
 )
 def test___get_all_folders_from_folder___input_folder___equal_files(post_folder, tmpdir):
@@ -27,5 +27,7 @@ def test___get_all_folders_from_folder___input_folder___equal_files(post_folder,
         tmpdir.mkdir(item)
 
     list_of_directories = get_all_folders_from_folder(tmpdir)
+    list_of_directories.sort()
+    post_folder.sort()
 
     assert list_of_directories == post_folder
