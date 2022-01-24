@@ -13,6 +13,7 @@ Example:
 
 import glob
 import os
+import sys
 
 
 def read_file(filename):
