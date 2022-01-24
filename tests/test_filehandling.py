@@ -1,5 +1,5 @@
 import pytest
-from file_handling import get_all_files_from_folder, get_all_folders_from_folder
+from swissarmyknife.file_handling import get_all_files_from_folder, get_all_folders_from_folder
 
 
 @pytest.mark.parametrize(
