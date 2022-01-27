@@ -20,7 +20,7 @@ def read_file(filename):
     Returns:
       str: content of file
     """
-    with open(filename, "r") as file_object:
+    with open(filename, "r", encoding='utf8') as file_object:
         # Append 'hello' at the end of file
         content = file_object.read()
     return content
@@ -36,7 +36,7 @@ def write_file(filename, content):
     Returns:
       None: nothing
     """
-    with open(filename, "w") as file_object:
+    with open(filename, "w", encoding='utf8') as file_object:
         file_object.write(content)
 
 
@@ -76,7 +76,7 @@ def get_all_folders_from_folder(start_folder):
     except StopIteration:
         folders = []
         print(f"folder {start_folder} not found")
-    except:  # noqa
+    except:  # pylint: disable = bare-except # noqa
         folders = []
         print("Unexpected error:", sys.exc_info())
 
