@@ -6,10 +6,10 @@ This module provides different io functions
 
 import glob
 import os
-import sys
+from typing import List
 
 
-def read_file(filename):
+def read_file(filename: str) -> str:
     """Read file
 
     Nothing special
@@ -20,13 +20,18 @@ def read_file(filename):
     Returns:
       str: content of file
     """
-    with open(filename, "r", encoding='utf8') as file_object:
-        # Append 'hello' at the end of file
-        content = file_object.read()
+
+    try:
+        with open(filename, "r", encoding='utf8') as file_object:
+            # Append 'hello' at the end of file
+            content = file_object.read()
+    except FileNotFoundError:
+        print(f"{filename} not found.")
+        content = ""
     return content
 
 
-def write_file(filename, content):
+def write_file(filename: str, content: str):
     """Write file
 
     Args:
@@ -40,7 +45,7 @@ def write_file(filename, content):
         file_object.write(content)
 
 
-def get_all_files_from_folder(folder, extension=""):
+def get_all_files_from_folder(folder: str, extension: str = "") -> List[str]:
     """ Get all files from a folder
 
     Args:
@@ -58,7 +63,7 @@ def get_all_files_from_folder(folder, extension=""):
     return list_of_files
 
 
-def get_all_folders_from_folder(start_folder):
+def get_all_folders_from_folder(start_folder: str) -> List[str]:
     """ Get all folders from a folder
 
     Args:
@@ -68,7 +73,7 @@ def get_all_folders_from_folder(start_folder):
       List[str]: name of folders in folder
 
     Raises:
-        IOError: An error occurred accessing the smalltable.
+        StopIteration: An error occurred accessing the smalltable.
     """
     try:
         folders = next(os.walk(start_folder))[1]
@@ -76,8 +81,5 @@ def get_all_folders_from_folder(start_folder):
     except StopIteration:
         folders = []
         print(f"folder {start_folder} not found")
-    except:  # pylint: disable = bare-except # noqa
-        folders = []
-        print("Unexpected error:", sys.exc_info())
 
     return folders

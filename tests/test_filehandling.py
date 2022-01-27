@@ -1,5 +1,23 @@
+import os.path
+
 import pytest
-from swissarmyknife.file_handling import get_all_files_from_folder, get_all_folders_from_folder
+from swissarmyknife.file_handling import get_all_files_from_folder, get_all_folders_from_folder, read_file, write_file
+
+
+def test___read_file___empty_string():
+    content = read_file("hello.txt")
+
+    assert content == ""
+
+
+def test_write_read_file___text___correct_reading(test_folder):
+    input_file = os.path.join(test_folder.output, "basic.txt")
+    content_write = "hello world"
+
+    write_file(input_file, content_write)
+    content_read = read_file(input_file)
+
+    assert content_read == content_write
 
 
 @pytest.mark.parametrize(
@@ -31,3 +49,9 @@ def test___get_all_folders_from_folder___input_folder___equal_files(post_folder,
     post_folder.sort()
 
     assert list_of_directories == post_folder
+
+
+def test__get_all_folders_from_folder___not_existing_path___empty():
+    list_of_directories = get_all_folders_from_folder("not_existing_folder")
+
+    assert list_of_directories == []
