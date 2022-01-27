@@ -1,13 +1,6 @@
-""" Example io_functions
+"""
 
 This module provides different io functions
-
-Example:
-    Examples can be given using either the ``Example`` or ``Examples``
-    sections. Sections support any reStructuredText formatting, including
-    literal blocks::
-
-        $ python example_google.py
 
 """
 

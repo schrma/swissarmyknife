@@ -2,4 +2,4 @@
 Contributors
 ============
 
-* LGS-NET\schrma <marco.schroeder@leica-geosystems.com>
+* mm4go <mm4go.marcschr@dfgh.net>

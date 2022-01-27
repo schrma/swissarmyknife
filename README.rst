@@ -1,49 +1,44 @@
-.. These are examples of badges you might want to add to your README:
-   please update the URLs accordingly
-
-    .. image:: https://api.cirrus-ci.com/github/<USER>/swissarmyknife.svg?branch=main
-        :alt: Built Status
-        :target: https://cirrus-ci.com/github/<USER>/swissarmyknife
-    .. image:: https://readthedocs.org/projects/swissarmyknife/badge/?version=latest
-        :alt: ReadTheDocs
-        :target: https://swissarmyknife.readthedocs.io/en/stable/
-    .. image:: https://img.shields.io/coveralls/github/<USER>/swissarmyknife/main.svg
-        :alt: Coveralls
-        :target: https://coveralls.io/r/<USER>/swissarmyknife
-    .. image:: https://img.shields.io/pypi/v/swissarmyknife.svg
-        :alt: PyPI-Server
-        :target: https://pypi.org/project/swissarmyknife/
-    .. image:: https://img.shields.io/conda/vn/conda-forge/swissarmyknife.svg
-        :alt: Conda-Forge
-        :target: https://anaconda.org/conda-forge/swissarmyknife
-    .. image:: https://pepy.tech/badge/swissarmyknife/month
-        :alt: Monthly Downloads
-        :target: https://pepy.tech/project/swissarmyknife
-    .. image:: https://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=Twitter
-        :alt: Twitter
-        :target: https://twitter.com/swissarmyknife
-
-.. image:: https://img.shields.io/badge/-PyScaffold-005CA0?logo=pyscaffold
-    :alt: Project generated with PyScaffold
-    :target: https://pyscaffold.org/
-
-|
-
 ==============
 swissarmyknife
 ==============
 
+This is a collection of functions which i used frequently including:
 
-    Here comes more
+* file-handling (reading, writing)
+*
+
+.. note::
+   This project has been set up using PyScaffold 4.1.2 For details and usage information on PyScaffold see https://pyscaffold.org/.
+
+-------
+Content
+-------
+`Documention <https://www.google.ch>`_
+
+-------------------
+Build Documentation
+-------------------
+Execute the following commands to build the full documentation.
 
 
-A longer description of your project goes here...
 
+1. Set up virtual environment (must be done only the first time):
 
-.. _pyscaffold-notes:
+.. code-block:: shell
 
-Note
-====
+   python -m venv .venv-swiss
+   . .venv-swiss/Scripts/activate
+   python -m pip install --upgrade pip
+   python -m pip install tox
 
-This project has been set up using PyScaffold 4.1.2. For details and usage
-information on PyScaffold see https://pyscaffold.org/.
+2. Activate your virtual environment:
+
+.. code-block:: shell
+
+   . .venv-swiss/Scripts/activate
+
+3. Execute `tox`
+
+.. code-block:: shell
+
+   tox -e docs
