@@ -13,7 +13,7 @@ This is a collection of functions which i used frequently including:
 -------
 Content
 -------
-`Documention <https://www.google.ch>`_
+`Documention <https://swissarmyknife.readthedocs.io/en/latest/>`_
 
 -------------------
 Build Documentation
