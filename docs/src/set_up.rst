@@ -43,6 +43,52 @@ Sphinx
 .. code-block:: shell
 
     sphinx-build --color -b html -d "./docs/_build/doctrees" "./docs" "./docs/_build/html"
-    or
+
+or
+
+.. code-block:: shell
+
     tox -e docs
 
+Publish to Pypi
+===============
+
+.. code-block:: shell
+
+    git tag 0.0.4
+
+.. code-block:: shell
+
+    python -m twine check dist/*
+    python -m twine upload dist/*
+
+or
+
+.. code-block:: shell
+
+    tox -e publish
+
+Pylint
+======
+
+.. code-block:: shell
+
+    pylint --rcfile=setup.cfg src/swissarmyknife tests
+
+or
+
+.. code-block:: shell
+
+    tox -e pylint
+
+Flake8
+======
+
+.. code-block:: shell
+    flake8 src/swissarmyknife tests
+
+or
+
+.. code-block:: shell
+
+    tox -e flake8
