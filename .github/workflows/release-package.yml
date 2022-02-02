@@ -1,0 +1,19 @@
+# Relases a pacakge and publish to pypy and readthedocs
+
+name: Publish package
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Echo
+      run: |
+        echo "hello world"
