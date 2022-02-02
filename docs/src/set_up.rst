@@ -85,6 +85,7 @@ Flake8
 ======
 
 .. code-block:: shell
+
     flake8 src/swissarmyknife tests
 
 or
