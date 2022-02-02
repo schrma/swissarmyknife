@@ -15,7 +15,7 @@ Contents
    Contributions & Help <contributing>
    License <license>
    Authors <authors>
-   Changelog <changelog>
+   Changelog <CHANGELOG-local.md>
    Module Reference <api/modules>
 
 .. toctree::
