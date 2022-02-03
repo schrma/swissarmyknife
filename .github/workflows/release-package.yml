@@ -31,21 +31,13 @@ jobs:
         echo "My description: ${{ github.event.inputs.my_description }}"
         echo "My Version: ${{ github.event.inputs.my_version }}"
         echo "Git Version: ${{ github.event.inputs.version }}"
-        
-    - name: Get tag
-      id: tag
-      uses: dawidd6/action-get-tag@v1
-      with:
-        # Optionally strip `v` prefix
-        strip_v: true
-    - name: Use tag
-      run: echo ${{steps.tag.outputs.tag}}
-        
+               
     - id: get_version
       uses: battila7/get-version-action@v2
     - name: Get version
       run: |
         git tag
+        ls 
         echo "------------------------"
         echo ${{ steps.get_version.outputs.version-without-v }}
         echo ${{ steps.get_version.outputs.version }}
