@@ -33,8 +33,8 @@ jobs:
         echo "Git Version: ${{ github.event.inputs.version }}"
         
     - id: get_version
-    - name: Get version
       uses: battila7/get-version-action@v2
+    - name: Get version
     - run: |
         echo "------------------------"
         echo ${{ steps.get_version.outputs.version-without-v }}
