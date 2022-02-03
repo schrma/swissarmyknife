@@ -24,17 +24,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - id: get_version
-      uses: battila7/get-version-action@v2
-    - run: |
-        echo "------------------------"
-        echo ${{ steps.get_version.outputs.version-without-v }}
-        echo ${{ steps.get_version.outputs.version }}
-        echo "------------------------"
-
+      
     - uses: actions/checkout@v2
     - name: Echo
       run: |
         echo "My description: ${{ github.event.inputs.my_description }}"
         echo "My Version: ${{ github.event.inputs.my_version }}"
         echo "Git Version: ${{ github.event.inputs.version }}"
+        
+    - id: get_version
+    - name: Get version
+      uses: battila7/get-version-action@v2
+    - run: |
+        echo "------------------------"
+        echo ${{ steps.get_version.outputs.version-without-v }}
+        echo ${{ steps.get_version.outputs.version }}
+        echo "------------------------"
