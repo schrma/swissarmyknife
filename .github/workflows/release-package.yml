@@ -30,6 +30,7 @@ jobs:
           fetch-depth: 0
     - name: Echo
       run: |
+        echo "TAG_STRING=$(git describe --tags --abbrev=0)" >> $env:GITHUB_ENV
         echo "My description: ${{ github.event.inputs.my_description }}"
         echo "My Version: ${{ github.event.inputs.my_version }}"
         echo "Git Version: ${{ github.event.inputs.version }}"
@@ -38,10 +39,6 @@ jobs:
       uses: battila7/get-version-action@v2
     - name: Get version
       run: |
-        git tag
-        ls 
-        ls .git/refs/tags
         echo "------------------------"
-        echo ${{ steps.get_version.outputs.version-without-v }}
-        echo ${{ steps.get_version.outputs.version }}
+        echo "${{ env.TAG_STRING }}"
         echo "------------------------"
