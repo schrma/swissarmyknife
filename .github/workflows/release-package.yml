@@ -30,7 +30,7 @@ jobs:
           fetch-depth: 0
     - name: Echo
       run: |
-        echo "TAG_STRING=$(git describe --tags --abbrev=0)" >> $env:GITHUB_ENV
+        echo "TAG_STRING=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
         echo "My description: ${{ github.event.inputs.my_description }}"
         echo "My Version: ${{ github.event.inputs.my_version }}"
         echo "Git Version: ${{ github.event.inputs.version }}"
