@@ -40,6 +40,7 @@ jobs:
       run: |
         git tag
         ls 
+        ls .git/refs/tags
         echo "------------------------"
         echo ${{ steps.get_version.outputs.version-without-v }}
         echo ${{ steps.get_version.outputs.version }}
