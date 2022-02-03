@@ -30,7 +30,7 @@ jobs:
           fetch-depth: 0
     - name: Echo
       run: |
-        echo "TAG_STRING=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+        echo "TAG_STRING=$(git describe --tags --abbrev=0 | sed -e s/v//g)" >> $GITHUB_ENV
         echo "My description: ${{ github.event.inputs.my_description }}"
         echo "My Version: ${{ github.event.inputs.my_version }}"
         echo "Git Version: ${{ github.event.inputs.version }}"
@@ -43,3 +43,12 @@ jobs:
         echo "${{ env.TAG_STRING }}"
         echo "------------------------"
         env
+        
+    - name: Release package
+      uses: ncipollo/release-action@v1
+      with:       
+        tag: v${{ env.TAG_STRING }}
+        name: Release v${{ env.TAG_STRING }}
+        bodyFile: ./CHANGELOG.md
+        draft: true
+        token: ${{ secrets.GITHUB_TOKEN }}
