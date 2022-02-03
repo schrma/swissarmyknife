@@ -29,7 +29,6 @@ jobs:
 
     - run: echo ${{ steps.get_version.outputs.version-without-v }}
 
-    steps:
     - uses: actions/checkout@v2
     - name: Echo
       run: |
