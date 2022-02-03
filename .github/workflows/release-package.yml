@@ -26,7 +26,6 @@ jobs:
     steps:
     - id: get_version
       uses: battila7/get-version-action@v2
-    - name: print version
     - run: |
         echo "------------------------"
         echo ${{ steps.get_version.outputs.version-without-v }}
