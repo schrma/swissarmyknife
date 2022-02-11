@@ -44,9 +44,8 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Create wheel
       run: |
-        git tag v${{ env.TAG_STRING }}
         python -m pip install --upgrade pip
-        python -m pip install wheel, setuptools_scm 
+        python -m pip install wheel setuptools_scm 
         python setup.py bdist_wheel
         ls dist
     - name: Get version
