@@ -5,6 +5,8 @@ import shutil
 import sys
 from datetime import datetime
 
+# https://github.com/codezri/releasezri
+
 RZ_DIR = './.releasezri'
 TEMPLATE_FILE = './.releasezri/template.md'
 CHANGELOG_FILE = './CHANGELOG.md'
