@@ -32,25 +32,23 @@ jobs:
     - uses: actions/checkout@v2
       with:
           fetch-depth: 0
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Create wheel
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install wheel
-        python setup.py bdist_wheel
-        ls dist
     - name: Echo
       run: |
         echo "TAG_STRING=$(git describe --tags --abbrev=0 | sed -e s/v//g)" >> $GITHUB_ENV
         echo "My description: ${{ github.event.inputs.my_description }}"
         echo "My Version: ${{ github.event.inputs.my_version }}"
         echo "Git Version: ${{ github.event.inputs.version }}"
-               
-    - id: get_version
-      uses: battila7/get-version-action@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Create wheel
+      run: |
+        git tag v${{ env.TAG_STRING }}
+        python -m pip install --upgrade pip
+        python -m pip install wheel
+        python setup.py bdist_wheel
+        ls dist
     - name: Get version
       run: |
         echo "------------------------"
