@@ -22,12 +22,25 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8"]
 
     steps:
-      
+
     - uses: actions/checkout@v2
       with:
           fetch-depth: 0
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Create wheel
+      run: |
+        python -m pip install --upgrade pip
+        python setup.py bdist_wheel
+        ls dist
     - name: Echo
       run: |
         echo "TAG_STRING=$(git describe --tags --abbrev=0 | sed -e s/v//g)" >> $GITHUB_ENV
@@ -41,9 +54,9 @@ jobs:
       run: |
         echo "------------------------"
         echo "${{ env.TAG_STRING }}"
+        ls dist
         echo "------------------------"
-        env
-        
+
     - name: Release package
       uses: ncipollo/release-action@v1
       with:       
