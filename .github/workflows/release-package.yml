@@ -46,7 +46,7 @@ jobs:
       run: |
         git tag v${{ env.TAG_STRING }}
         python -m pip install --upgrade pip
-        python -m pip install wheel
+        python -m pip install wheel, setuptools_scm 
         python setup.py bdist_wheel
         ls dist
     - name: Get version
