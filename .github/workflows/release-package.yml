@@ -50,5 +50,6 @@ jobs:
         tag: v${{ env.TAG_STRING }}
         name: Release v${{ env.TAG_STRING }}
         bodyFile: ./CHANGELOG.md
+        artifacts: "./CHANGELOG.md"
         draft: true
         token: ${{ secrets.GITHUB_TOKEN }}
