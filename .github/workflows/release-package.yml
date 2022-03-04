@@ -73,7 +73,7 @@ jobs:
         # python -m twine upload dist/* -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}"
         tox -e clean
         tox -e build
-        # tox -e publish -- -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}
+        tox -e publish -- -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}
     - name: Commit and Push Changelog
       uses: EndBug/add-and-commit@v7.4.0
       with:
