@@ -35,7 +35,8 @@ jobs:
     - name: Create Version
       run: |
         git tag
-        git describe --tags --abbrev=0 
+        git describe --tags --abbrev=0
+        git log --oneline -10
         echo "TAG_STRING=$(git describe --tags --abbrev=0 | sed -e s/v//g)" >> $GITHUB_ENV
     - name: Get version
       run: |
@@ -61,8 +62,11 @@ jobs:
         PYPI_USER: ${{ secrets.PYPI_USER }}
         PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
+        git log --oneline -10
+        echo "------------"
         git tag -d ${{ env.TAG_STRING }}
         git tag ${{ env.TAG_STRING }}
+        git log --oneline -10
         python -m pip install --upgrade pip
         python -m pip install wheel setuptools_scm twine
         python setup.py bdist_wheel        
