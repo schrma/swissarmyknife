@@ -58,9 +58,9 @@ jobs:
         python -m pip install wheel setuptools_scm twine
         python setup.py bdist_wheel
         mv dist/swiss*.whl dist/swissarmyknife-${{ env.TAG_STRING }}.whl
-        echo ${{ Environments.PYPI_USER }}
+        echo ${{ secrets.PYPI_USER }}
         python -m twine check dist/*
-        python -m twine upload dist/* -u${{ Environments.PYPI_USER }} -p${{ Environments.PYPI_PASSWORD }}
+        python -m twine upload dist/* -u${{ secrets.PYPI_USER }} -p${{ secrets.PYPI_PASSWORD }}
 
     - name: Get version
       run: |
