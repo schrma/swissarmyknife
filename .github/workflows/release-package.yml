@@ -63,8 +63,8 @@ jobs:
         git config --global user.name "Your Name"
         # git tag -d ${{ env.TAG_STRING }}
         git tag -a 0.0.8 -m "Version 0.0.8"
-        # python -m pip install --upgrade pip
-        # python -m pip install wheel setuptools_scm twine
+        python -m pip install --upgrade pip
+        python -m pip install wheel setuptools_scm twine tox tox-wheel
         # python setup.py bdist_wheel
         # ls dist/*
         # mv dist/swiss*.whl dist/swissarmyknife-${{ env.TAG_STRING }}.whl
