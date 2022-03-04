@@ -55,6 +55,7 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install wheel setuptools_scm 
         python setup.py bdist_wheel
+        mv dist/swiss*.whl dist/swissarmyknife-${{ env.TAG_STRING }}.whl
         ls dist
     - name: Get version
       run: |
@@ -69,6 +70,6 @@ jobs:
         tag: v${{ env.TAG_STRING }}
         name: Release v${{ env.TAG_STRING }}
         bodyFile: ./.tmprz/release_notes.md
-        artifacts: "./CHANGELOG.md"
+        artifacts: dist/swissarmyknife-${{ env.TAG_STRING }}.whl
         draft: true
         token: ${{ secrets.GITHUB_TOKEN }}
