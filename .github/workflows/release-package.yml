@@ -40,7 +40,7 @@ jobs:
     - name: Get version
       run: |
         echo "------------------------"
-        echo "${{ env.TAG_STRING }}"
+        echo "${{ env.TAG_STRING }}" 
         echo "------------------------"
     - name: Create changelog
       run: |
@@ -62,7 +62,7 @@ jobs:
         PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
         git tag -d ${{ env.TAG_STRING }}
-        git tag ${{ env.TAG_STRING }}
+        git tag -a ${{ env.TAG_STRING }} -m "Version ${{ env.TAG_STRING }}"
         python -m pip install --upgrade pip
         python -m pip install wheel setuptools_scm twine
         python setup.py bdist_wheel
