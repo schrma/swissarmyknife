@@ -32,14 +32,12 @@ jobs:
     - uses: actions/checkout@v2
       with:
           fetch-depth: 0
-    - name: Create changelog
+    - name: Create Version
       run: |
         echo "TAG_STRING=$(git describe --tags --abbrev=0 | sed -e s/v//g)" >> $GITHUB_ENV
-        echo "My description: ${{ github.event.inputs.my_description }}"
-        echo "My Version: ${{ github.event.inputs.my_version }}"
-        echo "Git Version: ${{ github.event.inputs.version }}"
+    - name: Create changelog
         chmod +x ./scripts/rz.py
-        ./scripts/rz.py create $GITHUB_ENV
+        ./scripts/rz.py create ${{ env.TAG_STRING }}
     - name: Commit and Push Changelog
       uses: EndBug/add-and-commit@v7.4.0
       with:
