@@ -34,6 +34,7 @@ jobs:
           fetch-depth: 0
     - name: Create Version
       run: |
+        git show 0.0.6
         git tag
         git describe --tags --abbrev=0
         git log --oneline -10
@@ -63,10 +64,13 @@ jobs:
         PYPI_USER: ${{ secrets.PYPI_USER }}
         PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
+        git show HEAD
         git config --global user.email "you@example.com"
         git config --global user.name "Your Name"
         git tag -d ${{ env.TAG_STRING }}
         git tag -a ${{ env.TAG_STRING }} -m "Version ${{ env.TAG_STRING }}"
+        git show 0.0.6
+        git show HEAD
         python -m pip install --upgrade pip
         python -m pip install wheel setuptools_scm twine
         python setup.py bdist_wheel       
