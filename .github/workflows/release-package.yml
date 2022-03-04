@@ -45,7 +45,6 @@ jobs:
         default_author: github_actions
         message: 'Update changelog for v${{ env.TAG_STRING }}'
         add: 'CHANGELOG.md'
-        tag: v${{ env.TAG_STRING }}
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
