@@ -46,6 +46,7 @@ jobs:
     - name: Create changelog
       run: |
         chmod +x ./scripts/rz.py
+        git log -5
         # ./scripts/rz.py create ${{ env.TAG_STRING }}
     - name: Commit and Push Changelog
       uses: EndBug/add-and-commit@v7.4.0
@@ -68,7 +69,8 @@ jobs:
         git tag -a ${{ env.TAG_STRING }} -m "Version ${{ env.TAG_STRING }}"
         python -m pip install --upgrade pip
         python -m pip install wheel setuptools_scm twine
-        python setup.py bdist_wheel        
+        python setup.py bdist_wheel       
+        git log -5
         python -m twine check dist/*
         python -m twine upload dist/* -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}"
         mv dist/swiss*.whl dist/swissarmyknife-${{ env.TAG_STRING }}.whl
