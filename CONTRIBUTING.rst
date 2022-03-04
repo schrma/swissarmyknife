@@ -160,9 +160,25 @@ Implement your changes
 Submit your contribution
 ------------------------
 
+
+#. Update CHANGELOG.md
+
+Add changes under ``## Unrealease``. The title will be automatically updated with the tag-Version. And ``scripts/rz.py create X.Y.Z`` is responsible for that.
+
 #. If everything works fine, push your local branch to |the repository service| with::
 
     git push -u origin my-feature
+
+#. Add a tag::
+
+        git tag X.Y.Z
+        git push origin X.Y.Z
+
+   Z: Increment for bugfix
+
+   Y: Increment for a new feature
+
+   Z: Increment for break in the API
 
 #. Go to the web page of your fork and click |contribute button|
    to send your changes for review.
@@ -170,6 +186,26 @@ Submit your contribution
     Find more detailed information in `creating a PR`_. You might also want to open
     the PR as a draft first and mark it as ready for review after the feedbacks
     from the continuous integration (CI) system or any required fixes.
+
+After a pull request a CI-process from ``.github/workflows/check-python.yml`` is started (similar tests as with tox are excecuted)
+When the pull request was accepted and a *rebase merging* was done. The action from ``.github/workflows/release-package.yml`` is started.
+
+#. Reads out tag version and saves to a variable::
+
+     echo "TAG_STRING=$(git describe --tags --abbrev=0 | sed -e s/v//g)" >> $GITHUB_ENV
+
+#. Create wheel::
+
+    python setup.py bdist_wheel
+
+#. Create changelog-file::
+
+    ./scripts/rz.py create ${{ env.TAG_STRING }}
+
+   Adapt all the needed changelog files (``.tmprz/release_notes.md`` for the release and ``CHANGELOG.md``)
+
+#. Create Github Release
+
 
 
 Troubleshooting
