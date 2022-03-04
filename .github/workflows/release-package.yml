@@ -36,6 +36,7 @@ jobs:
       run: |
         echo "TAG_STRING=$(git describe --tags --abbrev=0 | sed -e s/v//g)" >> $GITHUB_ENV
     - name: Create changelog
+      run: |
         chmod +x ./scripts/rz.py
         ./scripts/rz.py create ${{ env.TAG_STRING }}
     - name: Commit and Push Changelog
