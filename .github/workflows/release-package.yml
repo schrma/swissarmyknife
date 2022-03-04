@@ -38,6 +38,8 @@ jobs:
     - name: Create changelog
       run: |
         chmod +x ./scripts/rz.py
+        git tag -d ${{ env.TAG_STRING }}
+        git tag ${{ env.TAG_STRING }}
         # ./scripts/rz.py create ${{ env.TAG_STRING }}
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
