@@ -49,13 +49,13 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Create wheel
+    - name: Create wheel and publish to pypi
       run: |
         python -m pip install --upgrade pip
-        python -m pip install wheel setuptools_scm 
+        python -m pip install wheel setuptools_scm tox
         python setup.py bdist_wheel
         mv dist/swiss*.whl dist/swissarmyknife-${{ env.TAG_STRING }}.whl
-        ls dist
+        tox -e publish -- --repository pypi
     - name: Get version
       run: |
         echo "------------------------"
