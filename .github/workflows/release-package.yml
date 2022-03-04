@@ -62,11 +62,10 @@ jobs:
         PYPI_USER: ${{ secrets.PYPI_USER }}
         PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
-        git log -10
-        echo "------------"
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
         git tag -d ${{ env.TAG_STRING }}
         git tag -a ${{ env.TAG_STRING }} -m "Version ${{ env.TAG_STRING }}"
-        git log -10
         python -m pip install --upgrade pip
         python -m pip install wheel setuptools_scm twine
         python setup.py bdist_wheel        
