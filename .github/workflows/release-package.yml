@@ -41,13 +41,10 @@ jobs:
       run: |
         echo "------------------------"
         echo "${{ env.TAG_STRING }}"
-        ls dist
         echo "------------------------"
     - name: Create changelog
       run: |
         chmod +x ./scripts/rz.py
-        git tag -d ${{ env.TAG_STRING }}
-        git tag ${{ env.TAG_STRING }}
         # ./scripts/rz.py create ${{ env.TAG_STRING }}
     - name: Commit and Push Changelog
       uses: EndBug/add-and-commit@v7.4.0
@@ -64,6 +61,8 @@ jobs:
         PYPI_USER: ${{ secrets.PYPI_USER }}
         PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
+        git tag -d ${{ env.TAG_STRING }}
+        git tag ${{ env.TAG_STRING }}
         python -m pip install --upgrade pip
         python -m pip install wheel setuptools_scm twine
         python setup.py bdist_wheel
