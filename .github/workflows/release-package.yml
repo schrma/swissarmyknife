@@ -39,7 +39,7 @@ jobs:
         echo "My Version: ${{ github.event.inputs.my_version }}"
         echo "Git Version: ${{ github.event.inputs.version }}"
         chmod +x ./scripts/rz.py
-        ./scripts/rz.py create ${{ env.TAG_STRING }}
+        ./scripts/rz.py create $GITHUB_ENV
     - name: Commit and Push Changelog
       uses: EndBug/add-and-commit@v7.4.0
       with:
