@@ -68,13 +68,13 @@ jobs:
         git config --global user.email "you@example.com"
         git config --global user.name "Your Name"
         git tag -d ${{ env.TAG_STRING }}
-        git tag -a 0.0.7 -m "Version 0.0.7"
-        git show HEAD
+        git tag -a 0.0.8 -m "Version 0.0.8"
         python -m pip install --upgrade pip
         python -m pip install wheel setuptools_scm twine
         python setup.py bdist_wheel       
-        mv dist/swiss*.whl dist/swissarmyknife-${{ env.TAG_STRING }}.whl 
-        # python -m twine check dist/*
+        ls dist/*
+        # mv dist/swiss*.whl dist/swissarmyknife-${{ env.TAG_STRING }}.whl 
+        python -m twine check dist/*
         python -m twine upload dist/* -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}"
 
 
