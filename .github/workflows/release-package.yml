@@ -34,13 +34,27 @@ jobs:
           fetch-depth: 0
     - name: Create Version
       run: |
+        git tag
+        git describe --tags --abbrev=0 
         echo "TAG_STRING=$(git describe --tags --abbrev=0 | sed -e s/v//g)" >> $GITHUB_ENV
+    - name: Get version
+      run: |
+        echo "------------------------"
+        echo "${{ env.TAG_STRING }}"
+        ls dist
+        echo "------------------------"
     - name: Create changelog
       run: |
         chmod +x ./scripts/rz.py
         git tag -d ${{ env.TAG_STRING }}
         git tag ${{ env.TAG_STRING }}
         # ./scripts/rz.py create ${{ env.TAG_STRING }}
+    - name: Commit and Push Changelog
+      uses: EndBug/add-and-commit@v7.4.0
+      with:
+        default_author: github_actions
+        message: 'Update changelog for v${{ env.TAG_STRING }}'
+        add: 'CHANGELOG.md'
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
@@ -56,20 +70,10 @@ jobs:
         mv dist/swiss*.whl dist/swissarmyknife-${{ env.TAG_STRING }}.whl
         python -m twine check dist/*
         python -m twine upload dist/* -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}"
-    - name: Commit and Push Changelog
-      uses: EndBug/add-and-commit@v7.4.0
-      with:
-        default_author: github_actions
-        message: 'Update changelog for v${{ env.TAG_STRING }}'
-        add: 'CHANGELOG.md'
 
 
-    - name: Get version
-      run: |
-        echo "------------------------"
-        echo "${{ env.TAG_STRING }}"
-        ls dist
-        echo "------------------------"
+
+
 
     - name: Release package
       uses: ncipollo/release-action@v1
