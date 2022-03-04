@@ -58,19 +58,22 @@ jobs:
         PYPI_USER: ${{ secrets.PYPI_USER }}
         PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
-        git show HEAD
+        # git show HEAD
         git config --global user.email "you@example.com"
         git config --global user.name "Your Name"
-        git tag -d ${{ env.TAG_STRING }}
+        # git tag -d ${{ env.TAG_STRING }}
         git tag -a 0.0.8 -m "Version 0.0.8"
-        python -m pip install --upgrade pip
-        python -m pip install wheel setuptools_scm twine
-        python setup.py bdist_wheel       
-        ls dist/*
-        mv dist/swiss*.whl dist/swissarmyknife-${{ env.TAG_STRING }}.whl 
-        ls dist/*
-        python -m twine check dist/*
-        python -m twine upload dist/* -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}"
+        # python -m pip install --upgrade pip
+        # python -m pip install wheel setuptools_scm twine
+        # python setup.py bdist_wheel
+        # ls dist/*
+        # mv dist/swiss*.whl dist/swissarmyknife-${{ env.TAG_STRING }}.whl
+        # ls dist/*
+        # python -m twine check dist/*
+        # python -m twine upload dist/* -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}"
+        tox -e clean
+        tox -e build
+        tox -e publish -- -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}
     - name: Commit and Push Changelog
       uses: EndBug/add-and-commit@v7.4.0
       with:
