@@ -46,7 +46,7 @@ jobs:
         echo "------------------------"
     - name: Create changelog
       run: |
-        chmod +x ./scripts/rz.py
+        # chmod +x ./scripts/rz.py
         git log -5
         # ./scripts/rz.py create ${{ env.TAG_STRING }}
     - name: Set up Python ${{ matrix.python-version }}
@@ -62,7 +62,8 @@ jobs:
         git config --global user.email "you@example.com"
         git config --global user.name "Your Name"
         # git tag -d ${{ env.TAG_STRING }}
-        git tag -a 0.0.8 -m "Version 0.0.8"
+        # git tag -a 0.0.8 -m "Version 0.0.8"
+        git status
         python -m pip install --upgrade pip
         python -m pip install wheel setuptools_scm twine tox tox-wheel
         # python setup.py bdist_wheel
@@ -74,12 +75,12 @@ jobs:
         tox -e clean
         tox -e build
         tox -e publish -- -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}"
-    - name: Commit and Push Changelog
-      uses: EndBug/add-and-commit@v7.4.0
-      with:
-        default_author: github_actions
-        message: 'Update changelog for v${{ env.TAG_STRING }}'
-        add: 'CHANGELOG.md'
+#    - name: Commit and Push Changelog
+#      uses: EndBug/add-and-commit@v7.4.0
+#      with:
+#        default_author: github_actions
+#        message: 'Update changelog for v${{ env.TAG_STRING }}'
+#        add: 'CHANGELOG.md'
 
 
 
