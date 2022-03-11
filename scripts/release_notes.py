@@ -1,23 +1,3 @@
-"""
-This is a the main file that can serve as a starting point for a Python
-console script. You can run this script because the following lines in the
-``[options.entry_points]`` section in ``setup.cfg``::
-
-    console_scripts =
-         my_publish = notebook_publisher.main:main
-
-Then run ``pip install .`` (or ``pip install -e .`` for editable mode)
-which will install the command ``my_publish`` inside your current environment.::
-
-    my_publish -i "D:\Temp\joplin\source"
-
-Note:
-    Have Fun
-
-References:
-    - https://setuptools.readthedocs.io/en/latest/userguide/entry_point.html
-    - https://pip.pypa.io/en/stable/reference/pip_install
-"""
 import argparse
 from parse import parse
 from datetime import datetime
