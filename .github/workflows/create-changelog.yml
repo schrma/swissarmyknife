@@ -38,7 +38,6 @@ jobs:
         echo "------------------------"
         echo "${{ env.TAG_STRING }}"
         echo "------------------------"
-        hello world
     - name: Commit and Push Changelog
       uses: EndBug/add-and-commit@v7.4.0
       with:
@@ -49,8 +48,8 @@ jobs:
       run: |
         git config --global user.email "noreply@example.com"
         git config --global user.name "Action: Update Python project"
-        git tag "0.0.8" -m ""
-        git push https://${{ inputs.github-user }}:${{ inputs.github-token }}@github.com/${{ github.repository }} "0.0.8"
-    - name: Get Version
+        git tag "${{ env.TAG_STRING }}" -m ""
+        git push https://${{ inputs.github-user }}:${{ inputs.github-token }}@github.com/${{ github.repository }} "${{ env.TAG_STRING }}"
+    - name: Get last tag
       run: |
-        echo "TAG_STRING=$(git describe --tags --abbrev=0 | sed -e s/v//g)" >> $GITHUB_ENV
+        git describe --tags --abbrev=0 | sed -e s/v//g
