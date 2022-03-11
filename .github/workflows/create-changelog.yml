@@ -31,7 +31,7 @@ jobs:
         python -m pip install parse
     - name: Create changelog
       run: |
-        python3 scripts/release_notes.py -c get_version -i CURRENT_RELEASE_NOTE.md
+        python3 scripts/release_notes.py -c create_changelog -i CURRENT_RELEASE_NOTE.md
         echo "TAG_STRING=$(python3 scripts/release_notes.py -c get_version -i CURRENT_RELEASE_NOTE.md)" >> $GITHUB_ENV
     - name: Get version
       run: |
