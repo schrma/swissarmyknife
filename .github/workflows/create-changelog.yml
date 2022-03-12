@@ -1,0 +1,55 @@
+# Relases a pacakge and publish to pypy and readthedocs
+
+name: Publish package
+
+on:
+  push:
+    branches: [ test ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8"]
+
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+          fetch-depth: 0
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install parse
+    - name: Create changelog
+      run: |
+        python3 scripts/release_notes.py -c create_changelog -i CURRENT_RELEASE_NOTE.md
+        echo "TAG_STRING=$(python3 scripts/release_notes.py -c get_version -i CURRENT_RELEASE_NOTE.md)" >> $GITHUB_ENV
+    - name: Get version
+      run: |
+        echo "------------------------"
+        echo "${{ env.TAG_STRING }}"
+        echo "------------------------"
+    - name: Commit and Push Changelog
+      uses: EndBug/add-and-commit@v7.4.0
+      with:
+        default_author: github_actions
+        message: 'Update changelog for v${{ env.TAG_STRING }}'
+        add: 'CHANGELOG.md'
+    - name: Create tag
+      run: |
+        git config --global user.email "noreply@example.com"
+        git config --global user.name "Action: Update Python project"
+        git tag "${{ env.TAG_STRING }}" -m ""
+        git push https://${{ inputs.github-user }}:${{ inputs.github-token }}@github.com/${{ github.repository }} "${{ env.TAG_STRING }}"
+    - name: Get last tag
+      run: |
+        git describe --tags --abbrev=0 | sed -e s/v//g
