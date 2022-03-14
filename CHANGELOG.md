@@ -5,12 +5,6 @@ Add all code changes (features, deprecations, and enhancements)
 ## v0.0.8 
 - Own release notes
 
-## v0.0.8 
-- Own release notes
-
-## v0.0.8 
-- Own release notes
-
 ## v0.0.5
 - Additional tests
 

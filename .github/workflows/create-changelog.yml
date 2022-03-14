@@ -3,8 +3,10 @@
 name: Publish package
 
 on:
-  push:
-    branches: [ test ]
+  workflow_run:
+    workflows: ["Check Python"]
+    types:
+      - completed
 
 jobs:
 

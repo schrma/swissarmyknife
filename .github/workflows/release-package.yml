@@ -1,6 +1,4 @@
-# Relases a pacakge and publish to pypy and readthedocs
-
-name: Publish package
+name: Create changelog and tag
 
 on:
   push:
