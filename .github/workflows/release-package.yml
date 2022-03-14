@@ -37,7 +37,6 @@ jobs:
         echo "TAG_STRING=$(git describe --tags --abbrev=0 | sed -e s/v//g)" >> $GITHUB_ENV
     - name: Get version
       run: |
-        git tag
         echo "------------------------"
         echo "${{ env.TAG_STRING }}" 
         echo "------------------------"
@@ -61,8 +60,7 @@ jobs:
         python -m pip install wheel setuptools_scm twine tox tox-wheel
         tox -e clean
         tox -e build
-        # tox -e publish -- -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}"
-        ls
+        tox -e publish -- -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}"
         ls dist
     - name: Release package
       uses: ncipollo/release-action@v1
@@ -70,6 +68,6 @@ jobs:
         tag: v${{ env.TAG_STRING }}
         name: Release v${{ env.TAG_STRING }}
         bodyFile: ./.tmprz/release_notes.md
-        artifacts: dist/swissarmyknife-${{ env.TAG_STRING }}.whl
+        artifacts: dist/*.whl
         draft: true
         token: ${{ secrets.GITHUB_TOKEN }}
