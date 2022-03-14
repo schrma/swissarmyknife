@@ -2,11 +2,10 @@
 
 name: Publish package
 
+
 on:
-  workflow_run:
-    workflows: ["Check Python"]
-    types:
-      - completed
+  push:
+    branches: [ master ]
 
 jobs:
 
