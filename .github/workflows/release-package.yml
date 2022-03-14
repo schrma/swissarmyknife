@@ -40,8 +40,12 @@ jobs:
         echo "------------------------"
         echo "${{ env.TAG_STRING }}" 
         echo "------------------------"
-    - name: Create changelog
+    - name: Install dependencies
       run: |
+        python -m pip install --upgrade pip
+        python -m pip install parse
+    - name: Create changelog
+      run: |        
         python3 scripts/release_notes.py -c create_release -i CURRENT_RELEASE_NOTE.md
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
@@ -56,7 +60,7 @@ jobs:
         python -m pip install wheel setuptools_scm twine tox tox-wheel
         tox -e clean
         tox -e build
-        tox -e publish -- -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}"
+        # tox -e publish -- -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}"
         ls
         ls dst
     - name: Release package
