@@ -77,12 +77,6 @@ and use Python's built-in web server for a preview in your web browser
 Code Contributions
 ==================
 
-.. todo:: Please include a reference or explanation about the internals of the project.
-
-   An architecture description, design principles or at least a summary of the
-   main concepts will make it easy for potential contributors to get started
-   quickly.
-
 Submit an issue
 ---------------
 
@@ -161,24 +155,25 @@ Submit your contribution
 ------------------------
 
 
-#. Update CHANGELOG.md
-
-Add changes under ``## Unrealease``. The title will be automatically updated with the tag-Version. And ``scripts/rz.py create X.Y.Z`` is responsible for that.
-
-#. If everything works fine, push your local branch to |the repository service| with::
-
-    git push -u origin my-feature
-
-#. Add a tag::
-
-        git tag X.Y.Z
-        git push origin X.Y.Z
+#. Update *CURRENT_RELEASE_NOTE.md*. The Version is very important because it is the base for tagging.
 
    Z: Increment for bugfix
 
    Y: Increment for a new feature
 
    Z: Increment for break in the API
+
+#. If everything works fine, push your local branch to |the repository service| with::
+
+    git push -u origin my-feature
+
+    Automatically  CI-process from ``.github/workflows/check-python.yml`` is started (similar tests as with tox are excecuted)
+
+#. Add a tag::
+
+        git tag X.Y.Z
+        git push origin X.Y.Z
+
 
 #. Go to the web page of your fork and click |contribute button|
    to send your changes for review.
@@ -187,8 +182,15 @@ Add changes under ``## Unrealease``. The title will be automatically updated wit
     the PR as a draft first and mark it as ready for review after the feedbacks
     from the continuous integration (CI) system or any required fixes.
 
-After a pull request a CI-process from ``.github/workflows/check-python.yml`` is started (similar tests as with tox are excecuted)
-When the pull request was accepted and a *rebase merging* was done. The action from ``.github/workflows/release-package.yml`` is started.
+
+When the pull request was accepted and a *rebase merging* was done. In the background is an update of the Documenation with ReadThedocs_. At the same time an action from ``.github/workflows/create-changelog.yml`` is started. The following points are executed:
+
+* Version is read from *CURRENT_RELEASE_NOTE.md*
+* *CHANGELOG.md* is update with *CURRENT_RELEASE_NOTE.md*
+* Commit
+* Tag
+
+On succes ``.github/workflows/release-package.yml``is started.
 
 #. Reads out tag version and saves to a variable::
 
@@ -198,11 +200,7 @@ When the pull request was accepted and a *rebase merging* was done. The action f
 
     python setup.py bdist_wheel
 
-#. Create changelog-file::
-
-    ./scripts/rz.py create ${{ env.TAG_STRING }}
-
-   Adapt all the needed changelog files (``.tmprz/release_notes.md`` for the release and ``CHANGELOG.md``)
+#. Publish to PyPI_
 
 #. Create Github Release
 
@@ -327,3 +325,4 @@ on PyPI_, the following steps can be used to release a new version for
 
 .. _GitHub web interface: https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files
 .. _GitHub's code editor: https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files
+.. _ReadThedocs: https://readthedocs.org/projects/swissarmyknife/
