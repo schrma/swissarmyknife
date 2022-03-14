@@ -2,7 +2,7 @@ name: Create changelog and tag
 
 on:
   workflow_run:
-    workflows: ["Check Python"]
+    workflows: ["Create changelog and tag"]
     types:
       - completed
 

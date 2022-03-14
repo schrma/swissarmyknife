@@ -2,9 +2,6 @@
 
 Add all code changes (features, deprecations, and enhancements)
 
-## v0.0.9 
-- Workflow Test
-
 ## v0.0.8 
 - Own release notes
 
