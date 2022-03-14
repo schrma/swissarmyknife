@@ -1,4 +1,4 @@
-name: Create changelog and tag
+name: Publish
 
 on:
   workflow_run:
