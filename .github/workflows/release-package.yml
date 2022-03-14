@@ -34,7 +34,6 @@ jobs:
           fetch-depth: 0
     - name: Create Version
       run: |
-        git fetch --tags
         echo "TAG_STRING=$(git describe --tags --abbrev=0 | sed -e s/v//g)" >> $GITHUB_ENV
     - name: Get version
       run: |

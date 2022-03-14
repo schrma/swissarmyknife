@@ -48,6 +48,7 @@ jobs:
       run: |
         git config --global user.email "noreply@example.com"
         git config --global user.name "Action: Update Python project"
+
         git tag -a "${{ env.TAG_STRING }}" -m v"${{ env.TAG_STRING }}"
         git push https://${{ inputs.github-user }}:${{ inputs.github-token }}@github.com/${{ github.repository }} "${{ env.TAG_STRING }}"
     - name: Get last tag
