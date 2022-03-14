@@ -37,6 +37,7 @@ jobs:
         echo "TAG_STRING=$(git describe --tags --abbrev=0 | sed -e s/v//g)" >> $GITHUB_ENV
     - name: Get version
       run: |
+        git tag
         echo "------------------------"
         echo "${{ env.TAG_STRING }}" 
         echo "------------------------"
@@ -62,7 +63,7 @@ jobs:
         tox -e build
         # tox -e publish -- -u${{ secrets.PYPI_USER }} -p"${{ secrets.PYPI_PASSWORD }}"
         ls
-        ls dst
+        ls dist
     - name: Release package
       uses: ncipollo/release-action@v1
       with:       
